@@ -1,10 +1,10 @@
 <?php
-echo "all is ok";
-$data = filter_input_array(INPUT_POST);
-var_dump($data);
-$input = file_get_contents('php://input');
+echo "all is working";
+//$data = filter_input_array(INPUT_POST);
+//var_dump($data);
+//$input = file_get_contents('php://input');
 //$data = json_decode($input, true);
-var_dump($input);
+//var_dump($input);
 
 /*
 // Profile Key (ServerKey)
