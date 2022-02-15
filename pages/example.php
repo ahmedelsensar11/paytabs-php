@@ -15,6 +15,7 @@
             crossorigin="anonymous"></script>
 </Head>
 <Body>
+    
 <div class="card" style="width: 18rem;">
     <img src="images/laptophp.jpg" class="card-img-top" alt="product_img">
     <div class="card-body">
@@ -29,11 +30,54 @@
 
 <?php
 
-    //general fun
-    echo "======";
-    echo '<br/>';
+//general fun
+    function consumeWebservice($path, $type = "json", $data = "")
+    {
+        if ($type == "json") {
+            $jsondata = file_get_contents($path . "&json=true");
+            $data = json_decode($jsondata, true);
+        } elseif ($type == "payload") {
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $path);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+            // Set the content type to application/json
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+            // Return response instead of outputting
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            // Execute the POST request
+            $result  = curl_exec($ch);
+            $info = curl_getinfo($ch);
+            $data = json_decode($result , true);
+            // Close cURL resource
+            curl_close($ch);
+        } elseif ($type == "post") {
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $path);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLINFO_HEADER_OUT, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+            curl_setopt($ch, CURLINFO_HEADER_OUT, true);
+            // Return response instead of outputting
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            // Execute the POST request
+            $result  = curl_exec($ch);
+            $info = curl_getinfo($ch);
+            $data = json_decode($result , true);
+            // Close cURL resource
+            curl_close($ch);
+        } else {
+            $data = simplexml_load_file($path);
+        }
+        //System::printFormat($info);
+        return $data;
+    }
+    $url = "https://newsapi.org/v2/everything?q=apple&from=2022-02-13&to=2022-02-13&sortBy=popularity&apiKey=1665ee67176f4a0cb3e291b9c80adacc";
+    //print_r(consumeWebservice($url)['status']);
+    echo "first";
     function curlPostRequest(){
+        //$dataArr = array('Id' => 1, 'Customer' => 'Jhon Smith', 'Quantity' => 10, 'Price' => 20.00);
         $url = "https://secure-egypt.paytabs.com/payment/request ";
+
         $curl = curl_init($url);
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_POST, true);
@@ -58,14 +102,22 @@
         //var_dump($data, $dataArr);
         curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
         $resp = curl_exec($curl);
+        //var_dump($resp);
         curl_close($curl);
         return $resp;
     }
-    $resData = curlPostRequest();
-    var_dump($resData);
-    //$response = json_decode($resData,true);
     echo '<br/>';
+    $resData = curlPostRequest();
+    //$response = json_decode($resData,true);
+    var_dump($resData);
     //print_r($response['redirect_url']);
     //header('Location: '.$response['redirect_url']);
 
+/*
+$url = "https://newsapi.org/v2/everything?q=apple&from=2022-02-13&to=2022-02-13&sortBy=popularity&apiKey=1665ee67176f4a0cb3e291b9c80adacc";
+$sender = curl_init();
+curl_setopt($sender,CURLOPT_RETURNTRANSFER,true);
+curl_setopt($sender,CURLOPT_URL,$url);
+//print_r(curl_exec($sender));
+curl_close($sender);*/
 ?>
