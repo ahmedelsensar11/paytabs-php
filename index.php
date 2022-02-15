@@ -15,6 +15,7 @@
             crossorigin="anonymous"></script>
 </Head>
 <Body>
+    
 <div class="card" style="width: 18rem;">
     <img src="images/laptophp.jpg" class="card-img-top" alt="product_img">
     <div class="card-body">
@@ -71,8 +72,8 @@
         return $data;
     }
     $url = "https://newsapi.org/v2/everything?q=apple&from=2022-02-13&to=2022-02-13&sortBy=popularity&apiKey=1665ee67176f4a0cb3e291b9c80adacc";
-    print_r(consumeWebservice($url)['status']);
-
+    //print_r(consumeWebservice($url)['status']);
+    echo "first";
     function curlPostRequest(){
         //$dataArr = array('Id' => 1, 'Customer' => 'Jhon Smith', 'Quantity' => 10, 'Price' => 20.00);
         $url = "https://secure-egypt.paytabs.com/payment/request ";
@@ -107,9 +108,10 @@
     }
     echo '<br/>';
     $resData = curlPostRequest();
-    $response = json_decode($resData,true);
+    //$response = json_decode($resData,true);
+    var_dumb($resData);
     //print_r($response['redirect_url']);
-    header('Location: '.$response['redirect_url']);
+    //header('Location: '.$response['redirect_url']);
 
 /*
 $url = "https://newsapi.org/v2/everything?q=apple&from=2022-02-13&to=2022-02-13&sortBy=popularity&apiKey=1665ee67176f4a0cb3e291b9c80adacc";
