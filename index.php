@@ -95,8 +95,8 @@
                     "cart_description": "Dummy Order 35925502061445345",
                     "cart_currency": "EGP",
                     "cart_amount": 46.17,
-                    "callback": "http://127.0.0.1/projects/pay-tab/pages/request.php",
-                    "return": "http://127.0.0.1/projects/pay-tab/pages/request.php"
+                    "callback": "https://qbizns.com/paytabs-php/pages/request.php",
+                    "return": "https://qbizns.com/paytabs-php/pages/request.php"
                 }';
         //var_dump($data, $dataArr);
         curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
