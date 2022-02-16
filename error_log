@@ -17,3 +17,4 @@ Stack trace:
 Stack trace:
 #0 {main}
   thrown in /home/qbizns/public_html/paytabs-php/index.php on line 112
+[15-Feb-2022 13:54:23 UTC] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/qbizns/public_html/paytabs-php/index.php on line 63
