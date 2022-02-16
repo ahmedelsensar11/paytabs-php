@@ -119,5 +119,10 @@ $sender = curl_init();
 curl_setopt($sender,CURLOPT_RETURNTRANSFER,true);
 curl_setopt($sender,CURLOPT_URL,$url);
 //print_r(curl_exec($sender));
-curl_close($sender);*/
+curl_close($sender);
+
+
+
+
+*/
 ?>
