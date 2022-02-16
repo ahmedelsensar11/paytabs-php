@@ -18,3 +18,5 @@ Stack trace:
 #0 {main}
   thrown in /home/qbizns/public_html/paytabs-php/index.php on line 112
 [15-Feb-2022 13:54:23 UTC] PHP Warning:  session_start(): Cannot start session when headers already sent in /home/qbizns/public_html/paytabs-php/index.php on line 63
+[16-Feb-2022 10:08:07 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/qbizns/public_html/paytabs-php/index.php:1) in /home/qbizns/public_html/paytabs-php/index.php on line 69
+[16-Feb-2022 10:08:22 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/qbizns/public_html/paytabs-php/index.php:1) in /home/qbizns/public_html/paytabs-php/index.php on line 69
