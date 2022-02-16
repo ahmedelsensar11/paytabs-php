@@ -41,7 +41,7 @@
         $headers = array(
             "Content-Type: application/json",
             "Accept: application/json",
-            "authorization:SMJN2GHDM2-JDB2KMKMN2-NZZHLZ69GD",
+            "authorization:C9KMQP-VMT76D-2MKNKN-VHRH6D",
         );
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
         $data = '{
@@ -57,8 +57,10 @@
                 }';
         //var_dump($data, $dataArr);
         curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+        session_write_close();
         $resp = curl_exec($curl);
         curl_close($curl);
+        session_start();
         return $resp;
     }
     $resData = curlPostRequest();

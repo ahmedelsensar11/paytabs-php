@@ -1,11 +1,14 @@
 <?php
 echo "all is working";
 $data = filter_input_array(INPUT_POST);
-var_dump($data);
-echo '<br/>';
+//var_dump($data);
+//echo '<br/>';
 $input = file_get_contents('php://input');
-$encoded_data = json_decode($input, true);
-var_dump($input);
+$encoded_data = json_encode($input);
+//var_dump($input);
+
+file_put_contents('inputs.txt',$encoded_data);
+file_put_contents('post.txt',json_encode($data));
 
 /*
 // Profile Key (ServerKey)
