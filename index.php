@@ -29,43 +29,43 @@
 
 <?php
 
-    //general fun
-    echo "======";
-    echo '<br/>';
-    function curlPostRequest(){
-        $url = "https://secure-egypt.paytabs.com/payment/request ";
-        $curl = curl_init($url);
-        curl_setopt($curl, CURLOPT_URL, $url);
-        curl_setopt($curl, CURLOPT_POST, true);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        $headers = array(
-            "Content-Type: application/json",
-            "Accept: application/json",
-            "authorization:SMJN2GHDM2-JDB2KMKMN2-NZZHLZ69GD",
-        );
-        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-        $data = '{
-                    "profile_id": 89380,
-                    "tran_type": "sale",
-                    "tran_class": "ecom" ,
-                    "cart_id":"4244b9fd-c7e9-4f16-8d3c-4fe7bf6c48ca",
-                    "cart_description": "Dummy Order 35925502061445345",
-                    "cart_currency": "EGP",
-                    "cart_amount": 46.17,
-                    "callback": "https://qbizns.com/paytabs-php/pages/request.php",
-                    "return": "https://qbizns.com/paytabs-php/pages/request.php"
-                }';
-        //var_dump($data, $dataArr);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-        $resp = curl_exec($curl);
-        curl_close($curl);
-        return $resp;
-    }
-    $resData = curlPostRequest();
-    var_dump($resData);
-    //$response = json_decode($resData,true);
-    echo '<br/>';
-    //print_r($response['redirect_url']);
-    //header('Location: '.$response['redirect_url']);
+//general fun
+function curlPostRequest($url, $data, $server_key)
+{
+    $curl = curl_init($url);
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_POST, true);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    $headers = array(
+        "content-type: application/json",
+        "accept: application/json",
+        "authorization:" . $server_key,
+    );
+    curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+    $resp = curl_exec($curl);
+    curl_close($curl);
+    return $resp;
+}
+
+$data = '{
+                "profile_id": 89380,
+                "tran_type": "sale",
+                "tran_class": "ecom",
+                "cart_id":"150",
+                "cart_description": "Dummy Order 35925502061445345",
+                "cart_currency": "EGP",
+                "cart_amount": 46.17,
+                "callback": "https://qbizns.com/paytabs-php/pages/request.php",
+                "return": "https://qbizns.com/paytabs-php/pages/request.php"
+            }';
+$url = "https://secure-egypt.paytabs.com/payment/request ";
+$server_key = 'SMJN2GHDM2-JDB2KMKMN2-NZZHLZ69GD';
+
+//make post request
+$response = curlPostRequest($url, $data, $server_key);
+$data = json_decode($response, true);
+//redirect to complete the payment on pay tabs gateway
+header('Location: ' . $data['redirect_url']);
 
 ?>
