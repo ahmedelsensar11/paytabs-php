@@ -43,9 +43,8 @@ function handleResponse($serverKey,$request_fields){
 //handle the response
 handleResponse($serverKey,$request_fields);
 
-/*
- * you can clear the next code
- * */
+//you can clear the next code
+echo '<br/>';
 echo "All is working";
 echo '<br/>';
 //$input_data = file_get_contents('php://input');
